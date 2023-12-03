@@ -1,4 +1,3 @@
-import re
 
 
 def get_num_from_coord(board: list[str], x: int, y: int) -> int:
