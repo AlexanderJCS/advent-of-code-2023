@@ -75,8 +75,6 @@ def main():
 
     adjacent_sum = 0
     for part_number in part_numbers:
-        print(part_number.number, is_adjacent_to_symbol(board, part_number))
-
         if is_adjacent_to_symbol(board, part_number):
             adjacent_sum += part_number.number
 
