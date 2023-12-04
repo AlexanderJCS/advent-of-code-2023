@@ -6,7 +6,7 @@ import part_1
 @dataclass
 class ScratchOffData:
     scratch_off: part_1.ScratchOff
-    matching_nums: int
+    num_matches: int
     card_number: int
     instances: int = 1
 
@@ -16,7 +16,7 @@ class ScratchOffManager:
         self.scratch_off_data: list[ScratchOffData] = [
             ScratchOffData(
                 scratch_off=scratch_off,
-                matching_nums=len(scratch_off.get_matching_nums()),
+                num_matches=len(scratch_off.get_matching_nums()),
                 card_number=index + 1
             )
 
@@ -24,7 +24,7 @@ class ScratchOffManager:
         ]
 
     def process_copies(self, card_data: ScratchOffData) -> None:
-        for i in range(card_data.matching_nums):
+        for i in range(card_data.num_matches):
             target_card = self.scratch_off_data[card_data.card_number + i]
             target_card.instances += 1
             self.process_copies(target_card)
