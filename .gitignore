@@ -1,3 +1,6 @@
+# Project-specific things
+input.txt
+
 # IDE things
 .idea
 .vscode
