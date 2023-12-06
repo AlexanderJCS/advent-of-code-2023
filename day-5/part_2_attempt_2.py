@@ -80,6 +80,7 @@ def work_backwards(num: int, step_index: int, steps: list[list[DoubleNumberMap]]
 def find_critical_points(number_map: DoubleNumberMap, step_index_of_map: int, steps: list[list[DoubleNumberMap]]) -> list[int]:
     critical_points: list[int] = [
         number_map.dst_range_start,
+        number_map.dst_range_start - 1,
         number_map.dst_range_start + number_map.length,
         number_map.dst_range_start + number_map.length + 1
     ]
