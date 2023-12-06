@@ -70,13 +70,23 @@ def reverse_one_step(num: int, step: list[DoubleNumberMap]) -> int:
     return num
 
 
-def find_critical_point(number_map: DoubleNumberMap, step_index_of_map: int, steps: list[list[DoubleNumberMap]]) -> int:
-    critical_point: int = number_map.dst_range_start
+def work_backwards(num: int, step_index: int, steps: list[list[DoubleNumberMap]]) -> int:
+    for i in range(step_index, -1, -1):
+        num = reverse_one_step(num, steps[i])
 
-    for i in range(step_index_of_map, -1, -1):
-        critical_point = reverse_one_step(critical_point, steps[i])
+    return num
 
-    return critical_point
+
+def find_critical_points(number_map: DoubleNumberMap, step_index_of_map: int, steps: list[list[DoubleNumberMap]]) -> list[int]:
+    critical_points: list[int] = [
+        number_map.dst_range_start,
+        number_map.dst_range_start + number_map.length
+    ]
+
+    for i, point in enumerate(critical_points):
+        critical_points[i] = work_backwards(point, step_index_of_map, steps)
+
+    return critical_points
 
 
 def main():
@@ -87,12 +97,12 @@ def main():
     steps: list[list[DoubleNumberMap]] = parse_maps(lines[1:])
 
     # Critical points are seed indices that the min must be, found by working backwards
-    critical_points: list[int] = [seed.start for seed in seeds]
+    critical_points: list[int] = [seed.start for seed in seeds] + [seed.stop - 1 for seed in seeds]
 
     for step_index, step in enumerate(steps):
         for num_map in step:
-            critical_points.append(
-                find_critical_point(num_map, step_index, steps)
+            critical_points.extend(
+                find_critical_points(num_map, step_index, steps)
             )
 
     # Remove critical points that are not in the input range
