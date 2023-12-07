@@ -59,6 +59,9 @@ class Hand:
 
         return count_dict
 
+    def compare_cards(self, other) -> zip:
+        return zip(self.hand, other.hand)
+
     def _compare(self, other) -> int:
         self_hand = self.get_hand_type()
         other_hand = other.get_hand_type()
@@ -66,7 +69,7 @@ class Hand:
         if self_hand != other_hand:
             return self_hand - other_hand
 
-        for self_card, other_card in zip(self.hand, other.hand):
+        for self_card, other_card in self.compare_cards(other):
             self_card_index = self.card_strength.index(self_card)
             other_card_index = self.card_strength.index(other_card)
 

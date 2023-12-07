@@ -27,24 +27,8 @@ class JokerHand(part_1.Hand):
 
         return self.joker_hand.replace("J", max_card)
 
-    def _compare(self, other) -> int:
-        self_hand = self.get_hand_type()
-        other_hand = other.get_hand_type()
-
-        if self_hand != other_hand:
-            return self_hand - other_hand
-
-        for self_card, other_card in zip(self.joker_hand, other.joker_hand):
-            self_card_index = self.card_strength.index(self_card)
-            other_card_index = self.card_strength.index(other_card)
-
-            if self_card_index < other_card_index:
-                return 1
-
-            if self_card_index > other_card_index:
-                return -1
-
-        return 0
+    def compare_cards(self, other) -> zip:
+        return zip(self.joker_hand, other.joker_hand)
 
 
 def main():
