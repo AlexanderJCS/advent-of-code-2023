@@ -1,12 +1,7 @@
 
 
 def get_diff(ints: list[int]) -> list[int]:
-    diffs: list[int] = []
-
-    for i in range(1, len(ints)):
-        diffs.append(ints[i] - ints[i - 1])
-
-    return diffs
+    return [ints[i] - ints[i - 1] for i in range(1, len(ints))]
 
 
 def get_diffs(oasis_report: list[int]) -> list[list[int]]:
@@ -28,15 +23,12 @@ def predict_next_value(diffs: list[list[int]]) -> int:
 
 def main():
     with open("input.txt") as f:
-        lines = f.read().splitlines()
+        predicted_values = sum(
+            sum(diff[-1] for diff in get_diffs(list(map(int, line.split()))))
+            for line in f.read().splitlines()
+        )
 
-    predicted_values_sum = 0
-
-    for line in lines:
-        diffs = get_diffs(parse_line(line))
-        predicted_values_sum += predict_next_value(diffs)
-
-    print(predicted_values_sum)
+    print(predicted_values)
 
 
 if __name__ == "__main__":
