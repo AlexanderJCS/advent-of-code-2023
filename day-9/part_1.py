@@ -1,10 +1,7 @@
 
 
 def get_diffs(oasis_report: list[int]) -> list[list[int]]:
-    last_report = oasis_report
-    diffs = [oasis_report] + [(last_report := [last_report[i] - last_report[i - 1] for i in range(1, len(last_report))]) for _ in range(len(oasis_report) - 1)]
-
-    return diffs
+    return [oasis_report] + [(last_report := [(last_report if "last_report" in locals() else oasis_report)[i] - (last_report if "last_report" in locals() else oasis_report)[i - 1] for i in range(1, len(last_report if "last_report" in locals() else oasis_report))]) for _ in range(len(oasis_report) - 1)]
 
 
 def main():
