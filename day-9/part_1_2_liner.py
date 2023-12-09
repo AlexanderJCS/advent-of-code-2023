@@ -1,0 +1,2 @@
+get_diffs = lambda oasis_report: [oasis_report] + [(last_report := [(last_report if "last_report" in locals() else oasis_report)[i] - (last_report if "last_report" in locals() else oasis_report)[i - 1] for i in range(1, len(last_report if "last_report" in locals() else oasis_report))]) for _ in range(len(oasis_report) - 1)]
+print(sum(sum(diff[-1] for diff in get_diffs(list(map(int, line.split())))) for line in open("input.txt").read().splitlines()))
