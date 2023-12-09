@@ -6,7 +6,11 @@ def get_diffs(oasis_report: list[int]) -> list[list[int]]:
 
 def main():
     predicted_values = sum(
-        sum(diff[-1] for diff in get_diffs(list(map(int, line.split()))))
+        sum(diff[-1] for diff in list(map(
+            get_diffs,
+            [list(map(int, line.split()))]
+
+        ))[0])
         for line in open("input.txt").read().splitlines()
     )
 
