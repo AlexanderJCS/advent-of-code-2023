@@ -92,7 +92,7 @@ def construct_graph(lines: list[str], offsets: dict) -> nx.Graph:
 def find_farthest_dist(graph: nx.Graph, start_pos: tuple) -> int:
     farthest_dist = 0
 
-    for i, node in enumerate(graph.nodes):
+    for node in graph.nodes:
         try:
             dist = nx.shortest_path_length(graph, start_pos, node)
 
