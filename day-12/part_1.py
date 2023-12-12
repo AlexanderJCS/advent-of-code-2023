@@ -4,6 +4,9 @@ import time
 def is_valid_line(line: str | list[str], hashtags: list[int]) -> bool:
     hashtags_in_row = []
 
+    if line.count("#") != sum(hashtags):
+        return False
+
     hashtag_count = 0
     for element in line + ".":
         if element == "#":
