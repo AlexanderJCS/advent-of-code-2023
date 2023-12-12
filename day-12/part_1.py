@@ -1,30 +1,25 @@
+import time
 
 
 def is_valid_line(line: str | list[str], hashtags: list[int]) -> bool:
-    if line == ".###...##..#":
-        pass
-
-    max_hashtags = max(hashtags)
-
     hashtags_in_row = []
 
     hashtag_count = 0
-    for element in line:
+    for element in line + ".":
         if element == "#":
             hashtag_count += 1
 
         elif hashtag_count != 0:
-            # Exit early if you can
-            if hashtag_count > max_hashtags:
-                return False
-
             hashtags_in_row.append(hashtag_count)
             hashtag_count = 0
 
-    if hashtag_count != 0:
-        hashtags_in_row.append(hashtag_count)
+            if len(hashtags_in_row) > len(hashtags):
+                return False
 
-    return hashtags_in_row == hashtags
+            if hashtags_in_row[-1] != hashtags[len(hashtags_in_row) - 1]:
+                return False
+
+    return len(hashtags_in_row) == len(hashtags)
 
 
 def gen_combinations(s: str | list[str], current="", index=0):
@@ -105,11 +100,13 @@ def main():
 
     sum_arrangements = 0
 
+    start_time = time.time()
     for line in lines:
         springs, hashtags = parse_line(line)
 
         sum_arrangements += find_num_arrangements(springs, hashtags)
 
+    print(time.time() - start_time)
     print(sum_arrangements)
 
 
