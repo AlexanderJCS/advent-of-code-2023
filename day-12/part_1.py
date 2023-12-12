@@ -51,9 +51,6 @@ def has_too_many_in_row(line: list[str], max_hashtags: int) -> bool:
     """
     :return: True if the number of hashtags in a row is greater than the maximum
     """
-    if line[-2] == ".":
-        pass
-
     num_in_row = 0
     for element in line:
         if element == "#":
